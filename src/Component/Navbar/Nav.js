@@ -1,6 +1,4 @@
 import { Avatar, Dropdown, Link, Navbar, Text } from "@nextui-org/react";
-import Earn from "../Earn/Earn.js";
-import Expand from "../Expnad/Expand.js";
 import { Layout } from "./Layout.js";
 import { Logo } from "./Logo.js";
 
@@ -23,7 +21,7 @@ const Nav = () => {
   return (
     <Layout>
       <Navbar isBordered variant="sticky">
-        <Navbar.Toggle showIn="xs" />
+        <Navbar.Toggle showIn="lg" />
         <Navbar.Brand
           css={{
             "@xs": {
@@ -36,19 +34,6 @@ const Nav = () => {
             ACME
           </Text>
         </Navbar.Brand>
-        <Navbar.Content
-          enableCursorHighlight
-          activeColor="secondary"
-          hideIn="xs"
-          variant="highlight-rounded"
-        >
-          <Navbar.Link href="#">Features</Navbar.Link>
-          <Navbar.Link isActive href="#">
-            Dashboard
-          </Navbar.Link>
-          <Navbar.Link href="#"><Earn></Earn></Navbar.Link>
-          <Navbar.Link href="#"><Expand></Expand></Navbar.Link>
-        </Navbar.Content>
         <Navbar.Content
           css={{
             "@xs": {

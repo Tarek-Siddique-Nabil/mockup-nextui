@@ -9,6 +9,7 @@ function App() {
     <div className="App">
       <Nav></Nav>
       <Total></Total>
+      {/* <Home></Home> */}
     </div>
   );
 }
