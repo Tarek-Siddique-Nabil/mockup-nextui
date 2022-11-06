@@ -1,5 +1,5 @@
 import { Card, Grid, Text } from "@nextui-org/react";
-import Text_Home from "./Text";
+import TextHome from "./Text";
 
 const Home=()=> {
   const MockItem = ({ text }) => {
@@ -17,7 +17,7 @@ const Home=()=> {
     <Grid.Container gap={2} justify="center">
       <Grid xs={6}>
         {/* <MockItem  /> */}
-        <Text_Home></Text_Home>
+        <TextHome></TextHome>
       </Grid>
       <Grid xs={6}>
         <MockItem text="2 of 2" />

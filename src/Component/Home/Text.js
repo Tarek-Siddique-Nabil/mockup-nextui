@@ -1,6 +1,6 @@
 import { Text } from "@nextui-org/react";
 
-const Text_Home=()=> {
+const TextHome=()=> {
   return (
     <>
       <Text
@@ -36,4 +36,4 @@ const Text_Home=()=> {
     </>
   );
 };
-export default Text_Home;
+export default TextHome;
