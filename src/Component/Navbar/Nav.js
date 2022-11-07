@@ -38,7 +38,6 @@ const Nav = () => {
           css={{
             "@xs": {
               w: "12%",
-              jc: "flex-end",
             },
           }}
         >
@@ -109,6 +108,7 @@ const Nav = () => {
         </Navbar.Collapse>
       </Navbar>
     </Layout>
+
   );
 }
 export default Nav;
