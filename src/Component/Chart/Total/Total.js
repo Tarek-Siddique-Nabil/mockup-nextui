@@ -13,7 +13,7 @@ const data = [
         calc: "stringify",
       },
     ],
-    ["Copper", 44.94, "#b87333", 44.94],
+    ["Copper", 12.94, "#b87333", 12.94],
     ["Silver", 47.49, "silver", null],
     ["Gold", 19.3, "gold", null],
     ["Platinum", 21.45, "color: #e5e4e2", null],
@@ -30,14 +30,23 @@ const data = [
   
    
     return (
-      <div justify="center" align="center" css={{ m: 0 }}>
-      <Chart
+      <div justify="center" align="center" css={{ m: 0 }}>  
+        <main>
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      
+      <div class="px-4 py-6 sm:px-0">
+        <div class="h-96 rounded-lg border-4 border-dashed border-gray-200">
+        <Chart
         chartType="ColumnChart"
         width="100%"
         height="400px"
         data={data}
         options={options}
-      />
+      />  
+        </div>
+      </div>
+    </div>
+  </main>
       </div>
     );
   }

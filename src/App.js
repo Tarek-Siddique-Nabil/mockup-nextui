@@ -9,14 +9,17 @@ import Nav from "./Component/Navbar/Nav";
 
 function App() {
   return (
+    <div>
+      
       <Router>
+        <Nav></Nav>
       <Routes>
-      <Route path='/' element={<Nav/>} />
-      <Route path='/total' element={<Total/>} />
+      <Route  path='/' element={<Total/>} />
       <Route path='/monthly' element={<Monthly/>} />
       <Route path='/category' element={<Category/>} />
       </Routes>
       </Router>
+      </div>
   );
 }
 

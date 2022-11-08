@@ -38,7 +38,7 @@ const Home=()=> {
     </div>
   </header>
    <div className="flex justify-center space-x-4 mt-3">
-   <NavLink to="/total">
+   <NavLink to="/">
         <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  shadow-lg shadow-blue-500/50  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Total</button>
          </NavLink>
 
@@ -52,14 +52,6 @@ const Home=()=> {
         
 
    </div>
-  <main>
-    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-      
-      <div class="px-4 py-6 sm:px-0">
-        <div class="h-96 rounded-lg border-4 border-dashed border-gray-200"></div>
-      </div>
-    </div>
-  </main>
   </div>
     </div>
   );
