@@ -1,10 +1,16 @@
-import { Avatar, Dropdown, Link, Navbar, Text } from "@nextui-org/react";
+import { Avatar, Button, Dropdown, Link, Navbar, Text } from "@nextui-org/react";
+import { getAuth, signOut } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { NavLink } from "react-router-dom";
+import app from "../Firebase/firebase.config.js";
 import { Layout } from "./Layout.js";
 import { Logo } from "./Logo.js";
 
-
+const auth = getAuth(app);
 
 const Nav = () => {   
+
+   const [user] = useAuthState(auth)
     
     const collapseItems = [
         "Profile",
@@ -53,35 +59,35 @@ const Nav = () => {
                 />
               </Dropdown.Trigger>
             </Navbar.Item>
+            {!user?.email ?
+             <NavLink to='/login'><Button color="warning">Log in</Button></NavLink>:
             <Dropdown.Menu
               aria-label="User menu actions"
               color="secondary"
               onAction={(actionKey) => console.log({ actionKey })}
             >
-              <Dropdown.Item key="profile" css={{ height: "$18" }}>
-                <Text b color="inherit" css={{ d: "flex" }}>
+            
+             <Dropdown.Item key="profile" css={{ height: "$18" }}>
+                {user?.email ?<Text b color="inherit" css={{ d: "flex" }}>
                   Signed in as
-                </Text>
-                <Text b color="inherit" css={{ d: "flex" }}>
-                  zoey@example.com
-                </Text>
+                </Text>: <NavLink to='/login'><Button color="warning">Log in</Button></NavLink>
+              }
+                {user?.email &&<Text b color="inherit" css={{ d: "flex" }}>
+                   {user.email}
+                </Text>}
               </Dropdown.Item>
               <Dropdown.Item key="settings" withDivider>
                 My Settings
-              </Dropdown.Item>
-              <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
-              <Dropdown.Item key="analytics" withDivider>
-                Analytics
               </Dropdown.Item>
               <Dropdown.Item key="system">System</Dropdown.Item>
               <Dropdown.Item key="configurations">Configurations</Dropdown.Item>
               <Dropdown.Item key="help_and_feedback" withDivider>
                 Help & Feedback
               </Dropdown.Item>
-              <Dropdown.Item key="logout" withDivider color="error">
-                Log Out
-              </Dropdown.Item>
-            </Dropdown.Menu>
+              {user?.email &&<Dropdown.Item  key="logout" withDivider>
+                <Button color="error" onClick={()=>signOut(auth)}>Log Out</Button>
+              </Dropdown.Item>} 
+            </Dropdown.Menu>}
           </Dropdown>
         </Navbar.Content>
         <Navbar.Collapse>

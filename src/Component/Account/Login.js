@@ -1,9 +1,22 @@
-import React from 'react';
-
 import 'boxicons';
-import { NavLink } from 'react-router-dom';
+import { getAuth } from 'firebase/auth';
+import React from 'react';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import app from '../Firebase/firebase.config';
 
+const auth =getAuth(app);
 const Login = () => {
+  const [signInWithGoogle, user] = useSignInWithGoogle(auth);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from =location?.state?.from?.pathname || '/'
+const handleGoogleSignIn = ()=>{
+  signInWithGoogle()
+  .then(()=>{
+    navigate(from,{replace:true})
+  })
+}
     return (
         <div>
             <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -55,12 +68,13 @@ const Login = () => {
     <div class="flex-grow border-t border-gray-400"></div>
 </div>
 <div class="flex justify-center space-x-4">
-  <div><a href="#" class="bg-gray-200 hover:bg-gray-500 text-center py-2 px-4 rounded-full h-14 w-14 inline-flex items-center"><box-icon type='logo' name='google'></box-icon></a></div>
+  <div>
+    <button type='button' onClick={handleGoogleSignIn} class="bg-gray-200 hover:bg-gray-500 text-center py-2 px-4 rounded-full h-14 w-14 inline-flex items-center"><box-icon type='logo' name='google'></box-icon></button></div>
 
   <div>
-    <a href="#" class="bg-gray-300 hover:bg-blue-300 text-white text-center py-2 px-4 rounded-full h-14 w-14 inline-flex items-center"><box-icon type='logo' name='facebook'></box-icon></a></div>
+    <button  type='button' class="bg-gray-300 hover:bg-blue-300 text-white text-center py-2 px-4 rounded-full h-14 w-14 inline-flex items-center"><box-icon type='logo' name='facebook'></box-icon></button></div>
 
-  <div><a href="#" class="bg-gray-300 hover:bg-cyan-300 text-white text-center py-2 px-4 rounded-full h-14 w-14 inline-flex items-center"><box-icon type='logo' name='twitter'></box-icon></a></div>
+  <div><button type='button'  class="bg-gray-300 hover:bg-cyan-300 text-white text-center py-2 px-4 rounded-full h-14 w-14 inline-flex items-center"><box-icon type='logo' name='twitter'></box-icon></button></div>
 </div>
     </form>
   </div>
