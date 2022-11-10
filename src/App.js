@@ -7,6 +7,7 @@ import Category from './Component/Chart/Category/Category';
 import Monthly from './Component/Chart/Monthly/Monthly';
 import Total from './Component/Chart/Total/Total';
 import RequireAuth from './Component/hooks/RequireAuth';
+import Test from './Component/Test';
 
 
 
@@ -17,7 +18,7 @@ function App() {
         <Router> 
         <Body></Body>
       <Routes>
-      <Route path='/' element={
+      <Route path='/total' element={
         <RequireAuth>
           <Total></Total>
         </RequireAuth>
@@ -34,6 +35,7 @@ function App() {
       } />
       
       <Route path='/login' element={<Login/>} />
+      <Route path='/test' element={<Test/>} />
       <Route path='/register' element={<Register/>} />
       </Routes>
   </Router> 

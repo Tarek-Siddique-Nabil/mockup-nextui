@@ -2,6 +2,7 @@ import { Avatar, Button, Dropdown, Link, Navbar, Text } from "@nextui-org/react"
 import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink } from "react-router-dom";
+import Earn from "../Earn/Earn.js";
 import app from "../Firebase/firebase.config.js";
 import { Layout } from "./Layout.js";
 import { Logo } from "./Logo.js";
@@ -36,9 +37,13 @@ const Nav = () => {
           }}
         >
           <Logo />
-          <Text b color="inherit" hideIn="xs">
+          {!user?.email?<Text b color="inherit" hideIn="xs">
             ACME
-          </Text>
+          </Text>:
+          <div class="space-x-4 space-y-4 sm:justify-evenly">
+      <button><Earn></Earn></button>
+      <button><Earn></Earn></button>
+      </div>}
         </Navbar.Brand>
         <Navbar.Content
           css={{

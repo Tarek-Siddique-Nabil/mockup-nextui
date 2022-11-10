@@ -10,6 +10,9 @@ span {
 #image {
   height: auto;
 }
+#main-view{
+  margin-bottom: 200px;
+}
 @media (max-width: 639px) {
   #text {
     text-align: center;
@@ -31,8 +34,10 @@ span {
   #image {
     height: auto;
   }
+  #main-view{
+    margin-bottom: 200px;
+  }
   #dashboard {
     position: relative;
-    margin-top: 220px;
   }
 }

@@ -1,15 +1,40 @@
 import 'boxicons';
 import { getAuth } from 'firebase/auth';
-import React from 'react';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import React, { useState } from 'react';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import app from '../Firebase/firebase.config';
 
 const auth =getAuth(app);
 const Login = () => {
-  const [signInWithGoogle, user] = useSignInWithGoogle(auth);
+  //email login
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth);
+  const handleEmailBlur = event =>{
+    setEmail(event.target.value);
+  };
+  const handlePasswordBlur = event =>{
+    setPassword(event.target.value);
+  };
+  const handleUserSignIn = event =>{
+    event.preventDefault();
+    signInWithEmailAndPassword(email,password)
+      .then(()=>{
+    navigate(from,{replace:true})
+  })
+  }
+  //replace
   const location = useLocation();
   const navigate = useNavigate();
+  //google log in
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
+ 
   const from =location?.state?.from?.pathname || '/'
 const handleGoogleSignIn = ()=>{
   signInWithGoogle()
@@ -25,16 +50,16 @@ const handleGoogleSignIn = ()=>{
       <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company"/>
       <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
     </div>
-    <form class="mt-8 space-y-6" action="#" method="POST">
+    <form onSubmit={handleUserSignIn} class="mt-8 space-y-6" action="#" method="POST">
       <input type="hidden" name="remember" value="true"/>
       <div class="-space-y-px rounded-md shadow-sm">
         <div>
           <label for="email-address" class="sr-only">Email address</label>
-          <input id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Email address"/>
+          <input onBlur={handleEmailBlur} id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Email address"/>
         </div>
         <div>
           <label for="password" class="sr-only">Password</label>
-          <input id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Password"/>
+          <input onBlur={handlePasswordBlur} id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Password"/>
         </div>
       </div>
 
@@ -60,6 +85,7 @@ const handleGoogleSignIn = ()=>{
           Sign in
         </button>
       </div>
+        <p class="text-red-500">{error?.message}</p>
       <p>Don't have any account? <NavLink to="/register" className="text-rose-600">Register</NavLink></p>
       
       <div class="relative flex py-5 items-center">
